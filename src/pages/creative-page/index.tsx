@@ -1,8 +1,8 @@
-import { useState, useRef, Suspense } from "react";
-import Plane from "@/pages/creative-page/main_step2";
+import { useRef, Suspense } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
-import * as random from "maath/random/dist/maath-random.esm";
+import * as random from "maath/random";
+import EarthCanvas from "./Earth";
 
 const Stars = (props) => {
   const ref = useRef();
@@ -30,14 +30,16 @@ const Stars = (props) => {
 
 const CreativePage = () => {
   return (
-    <div className="w-full h-auto absolute inset-0 z-[-1]">
-      <Canvas camera={{ position: [0, 0, 1] }}>
-        <Suspense>
-          <Plane />
-          <Stars />
-        </Suspense>
-        <Preload all />
-      </Canvas>
+    <div style={{ height: "700px" }}>
+      <EarthCanvas />
+      <div className="w-full h-auto absolute inset-0 z-[-1]">
+        <Canvas camera={{ position: [0, 0, 1] }}>
+          <Suspense>
+            <Stars />
+          </Suspense>
+          <Preload all />
+        </Canvas>
+      </div>
     </div>
   );
 };
